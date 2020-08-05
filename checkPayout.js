@@ -19,7 +19,7 @@ setInterval(() => {
     runningActivesDigital = []
     runningActivesDigitalFive = []
 
-    // axios.get('https://besttraders.herokuapp.com/')
+    axios.get('https://checkpayout.herokuapp.com/')
 }, 300000)
 
 app.get('/log', (req, res) => {
