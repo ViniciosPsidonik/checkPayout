@@ -26,11 +26,17 @@ app.get('/log', (req, res) => {
 
 app.get('/payout', (req, res) => {
     console.log(payoutMap);
-    // res.send(payoutMap)
-    res.send([1])
+
+    // for (var [key, value] of payoutMap) {
+    //     let here = []
+    //     for (let index = 0; index < value.length; index++) {
+    //         here.push(value[index])
+    //     }
+    // }
+    
+    res.send([{payoutMap : 1}])
 })
 
-let ini
 app.get('/', function (req, res) {
     res.send('Opa')
 })
