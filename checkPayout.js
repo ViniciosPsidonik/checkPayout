@@ -23,7 +23,6 @@ app.get('/log', (req, res) => {
     res.status(200).send()
 })
 
-
 app.get('/payout/:type/:active', (req, res) => {
     console.log(payoutMap);
     const type = req.params.type
