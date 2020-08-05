@@ -27,9 +27,19 @@ app.get('/payout/:type/:active', (req, res) => {
     console.log(payoutMap);
     const type = req.params.type
     const active = req.params.active
+
+    log(type)
+    log(active)
+
     if (payoutMap.has(type) && payoutMap.get(type).has(parseInt(active)))
         res.send(payoutMap.get(type).get(parseInt(active)))
+    else 
+
 })
+
+const log = m => {
+    console.log(m)
+}
 
 app.get('/', function (req, res) {
     res.send('Opa')
