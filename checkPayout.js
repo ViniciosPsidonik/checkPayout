@@ -26,7 +26,7 @@ app.get('/log', (req, res) => {
 
 app.get('/payout', (req, res) => {
     console.log(payoutMap);
-    res.status(200).send(payoutMap)
+    res.send(payoutMap)
 })
 
 let ini
