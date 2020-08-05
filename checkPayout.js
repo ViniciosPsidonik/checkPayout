@@ -24,17 +24,12 @@ app.get('/log', (req, res) => {
 })
 
 
-app.get('/payout', (req, res) => {
+app.get('/payout/:type/:active', (req, res) => {
     console.log(payoutMap);
-
-    // for (var [key, value] of payoutMap) {
-    //     let here = []
-    //     for (let index = 0; index < value.length; index++) {
-    //         here.push(value[index])
-    //     }
-    // }
-    
-    res.send([{payoutMap : 1}])
+    const type = req.params.type
+    const active = req.params.active
+    if (payoutMap.has(type) && payoutMap.get(type).has(parseInt(active)))
+        res.send(payoutMap.get(type).get(parseInt(active)))
 })
 
 app.get('/', function (req, res) {
