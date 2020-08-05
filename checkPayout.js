@@ -14,11 +14,6 @@ app.use(bodyParser.json())
 let logging
 
 setInterval(() => {
-    runningActives = []
-    runningActivesBinary = []
-    runningActivesDigital = []
-    runningActivesDigitalFive = []
-
     axios.get('https://checkpayout.herokuapp.com/')
 }, 300000)
 
