@@ -24,7 +24,6 @@ app.get('/log', (req, res) => {
 })
 
 app.get('/payout/:type/:active', (req, res) => {
-    console.log(payoutMap);
     const type = req.params.type
     const active = req.params.active
 
@@ -32,7 +31,7 @@ app.get('/payout/:type/:active', (req, res) => {
     log(active)
 
     if (payoutMap.has(type) && payoutMap.get(type).has(parseInt(active)))
-        res.send(payoutMap.get(type).get(parseInt(active)))
+        res.status(200).send(payoutMap.get(type).get(parseInt(active)))
     else 
         res.send(404)
 
