@@ -49,11 +49,6 @@ app.get('/', function (req, res) {
 const PORT = process.env.PORT || 3000
 app.listen(PORT)
 
-const log = m => {
-    console.log(m)
-
-}
-
 const url = 'wss://iqoption.com/echo/websocket'
 
 let ssid
