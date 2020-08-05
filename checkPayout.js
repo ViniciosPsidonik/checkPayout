@@ -26,7 +26,8 @@ app.get('/log', (req, res) => {
 
 app.get('/payout', (req, res) => {
     console.log(payoutMap);
-    res.send(payoutMap)
+    // res.send(payoutMap)
+    res.send([1])
 })
 
 let ini
@@ -46,12 +47,7 @@ const url = 'wss://iqoption.com/echo/websocket'
 
 let ssid
 
-let buysMap = new Map()
-
 const activesMap = [108, 7, 943, 101, 7, 943, 101, 944, 99, 107, 2, 4, 1, 104, 102, 103, 3, 947, 5, 8, 100, 72, 6, 168, 105, 212, 76, 77, 78, 79, 80, 81, 84, 85, 86]
-const activesMapDigital = [7, 943, 7, 943, 101, 944, 99, 107, 2, 4, 1, 104, 102, 103, 3, 947, 5, 8, 100, 72, 6, 168, 105]
-const otcActives = [76, 77, 78, 79, 80, 81, 84, 85, 86]
-const otcActivesDigital = [76, 77, 78, 79, 80, 81, 84, 85, 86]
 
 const onOpen = () => {
     console.log(`Connected with websocket..`)
