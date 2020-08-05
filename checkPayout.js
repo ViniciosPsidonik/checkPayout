@@ -25,6 +25,7 @@ app.get('/log', (req, res) => {
 
 
 app.get('/payout', (req, res) => {
+    console.log(payoutMap);
     res.status(200).send(payoutMap)
 })
 
@@ -205,5 +206,6 @@ function subscribeActives() {
 setInterval(() => {
     if (ws.readyState === WebSocket.OPEN)
         ws.send(JSON.stringify({ "name": "api_option_init_all", "msg": "", "request_id": "" }))
-    log(payoutMap)
+    if (logging && logging.log)
+        log(payoutMap)
 }, 5000)
