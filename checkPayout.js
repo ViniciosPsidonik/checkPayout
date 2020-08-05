@@ -28,6 +28,7 @@ app.get('/log', (req, res) => {
     res.status(200).send()
 })
 
+
 app.get('/payout', (req, res) => {
     res.status(200).send(payoutMap)
 })
