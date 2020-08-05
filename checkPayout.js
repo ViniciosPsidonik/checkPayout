@@ -34,6 +34,7 @@ app.get('/payout/:type/:active', (req, res) => {
     if (payoutMap.has(type) && payoutMap.get(type).has(parseInt(active)))
         res.send(payoutMap.get(type).get(parseInt(active)))
     else 
+        res.send(404)
 
 })
 
