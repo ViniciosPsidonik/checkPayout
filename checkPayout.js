@@ -23,17 +23,16 @@ app.get('/log', (req, res) => {
     res.status(200).send()
 })
 
-app.get('/payout/:type/:active', (req, res) => {
+app.get('/payout/:type', (req, res) => {
     const type = req.params.type
-    const active = req.params.active
 
-    log(type)
-    log(active)
-
-    if (payoutMap.has(type) && payoutMap.get(type).has(parseInt(active))) {
-        const value = payoutMap.get(type).get(parseInt(active))
-        log(value)
-        res.status(200).send([value])
+    if (payoutMap.has(type)) {
+        let payoutsArray = []
+        for (var [key, value] of payoutMap.get(type)) {
+            payoutsArray.push(key)
+            payoutsArray.push(value)
+        }
+        res.status(200).send(payoutsArray)
     } else
         res.status(404)
 
