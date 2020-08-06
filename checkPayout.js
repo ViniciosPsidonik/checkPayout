@@ -32,6 +32,7 @@ app.get('/payout/:type', (req, res) => {
             payoutsArray.push(key)
             payoutsArray.push(value)
         }
+        log(payoutsArray)
         res.status(200).send(payoutsArray)
     } else
         res.status(404)
