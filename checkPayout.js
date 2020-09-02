@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 let payoutMap = new Map()
+let openedMap = new Map()
 let digitalPayoutMap = new Map()
 
 var express = require('express')
@@ -37,6 +38,12 @@ app.get('/payout/:type', (req, res) => {
     } else
         res.status(404)
 
+})
+
+app.get('/opened', (req, res) => {
+    res.json({
+        openedMap
+    })
 })
 
 const log = m => {
@@ -77,6 +84,8 @@ const onMessage = e => {
     }
 
     if (message.name == 'api_option_init_all_result') {
+        console.log(e.data);
+        process.exit()
         payoutStuff(message)
     }
 
@@ -107,6 +116,7 @@ function payoutDigitalStuff(message) {
 function payoutStuff(message) {
     let result = message.msg.result
     let payoutHere = new Map()
+    let openedHere = new Map()
     if (result && result.binary)
         Object.entries(result.binary.actives).forEach(([key1, value]) => {
             if (value.name) {
@@ -114,20 +124,27 @@ function payoutStuff(message) {
                 if (activesMapString.has(activeString)) {
                     const active = activesMapString.get(activeString)
                     payoutHere.set(active, 100 - value.option.profit.commission)
+                    if (value.enabled != undefined)
+                        openedHere.set(active, value.enabled)
                 }
             }
         })
+    openedMap.set('binary', openedHere)
     payoutMap.set('binary', payoutHere)
     payoutHere = new Map()
+    openedMap = new Map()
     if (result && result.turbo)
         Object.entries(result.turbo.actives).forEach(([key1, value]) => {
             const activeString = value.name.substring(6, value.name.length)
             if (activesMapString.has(activeString)) {
                 const active = activesMapString.get(activeString)
                 payoutHere.set(active, 100 - value.option.profit.commission)
+                if (value.enabled != undefined)
+                    openedHere.set(active, value.enabled)
             }
         })
     payoutMap.set('turbo', payoutHere)
+    openedMap.set('turbo', openedHere)
 }
 
 let ws = new WebSocket(url)
