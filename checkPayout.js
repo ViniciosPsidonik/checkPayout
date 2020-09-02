@@ -84,8 +84,6 @@ const onMessage = e => {
     }
 
     if (message.name == 'api_option_init_all_result') {
-        console.log(e.data);
-        process.exit()
         payoutStuff(message)
     }
 
