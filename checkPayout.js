@@ -171,6 +171,7 @@ const activesMapString = new Map([
     ['EURCAD', 105],
     ['EURNZD', 212],
     ['AUDCHF', 943],
+    ['CADJPY', 945],
     ['AUDJPY', 101],
     ['AUDNZD', 944],
     ['AUDUSD', 99],
