@@ -167,7 +167,6 @@ function payoutStuff(message) {
         })
     payoutMap.set('turbo', payoutHere)
     openedMap.set('turbo', openedHere)
-    // log(openedMap)
 }
 
 let ws = new WebSocket(url)
