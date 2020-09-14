@@ -43,7 +43,7 @@ app.get('/payout/:type', (req, res) => {
 app.get('/opened/:type', (req, res) => {
     const type = req.params.type
     if (openedMap.has(type)) {
-        res.status(200).send(Array.from(payoutMap.get(type)))
+        res.status(200).send(Array.from(openedMap.get(type)))
     } else
         res.status(404)
 })
