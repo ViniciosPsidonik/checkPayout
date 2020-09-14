@@ -2,6 +2,7 @@ const axios = require('axios')
 const WebSocket = require('ws')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const moment = require('moment')
 
 let payoutMap = new Map()
 let openedMap = new Map()
@@ -85,15 +86,35 @@ const onMessage = e => {
         subscribeActives()
     }
 
-    if (message.name == 'api_option_init_all_result') {
-        // console.log('RES = ' + e.data)
-        payoutStuff(message)
+    if (message.name == 'underlying-list') {
+        digitalOpened(message)
     }
+
+    if (message.name == 'api_option_init_all_result') {
+        payoutStuff(message)
+    } 
 
     if (message.name == 'instrument-quotes-generated') {
         payoutDigitalStuff(message)
     }
 
+}
+
+function digitalOpened(message) {
+    const underlying = message.msg.underlying
+    let openedHere = new Map()
+    for (let index = 0; index < underlying.length; index++) {
+        const underly = underlying[index]
+        let now = parseInt(moment().format('X'))
+        openedHere.set(underly.active_id, false)
+        for (let index1 = 0; index1 < underly.schedule.length; index1++) {
+            const schedule = underly.schedule[index1]
+            if (schedule.open < now && now < schedule.close) {
+                openedHere.set(underly.active_id, true)
+            }
+        }
+    }
+    openedMap.set('digital', openedHere)
 }
 
 function payoutDigitalStuff(message) {
@@ -227,8 +248,18 @@ function subscribeActives() {
 }
 
 setInterval(() => {
-    if (ws.readyState === WebSocket.OPEN)
+    if (ws.readyState === WebSocket.OPEN) {
         ws.send(JSON.stringify({ "name": "api_option_init_all", "msg": "", "request_id": "" }))
+        ws.send(JSON.stringify(
+            {
+                "name": "sendMessage", "msg": {
+                    "name": "get-underlying-list",
+                    "version": "2.0",
+                    "body": { "type": "digital-option" }, "request_id": ""
+                }
+            }
+        ))
+    }
     if (logging && logging.log)
         log(payoutMap)
 }, 5000)
