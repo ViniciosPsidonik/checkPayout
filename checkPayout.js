@@ -130,7 +130,7 @@ function payoutStuff(message) {
     openedMap.set('binary', openedHere)
     payoutMap.set('binary', payoutHere)
     payoutHere = new Map()
-    openedMap = new Map()
+    openedHere = new Map()
     if (result && result.turbo)
         Object.entries(result.turbo.actives).forEach(([key1, value]) => {
             const activeString = value.name.substring(6, value.name.length)
