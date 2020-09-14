@@ -40,10 +40,12 @@ app.get('/payout/:type', (req, res) => {
 
 })
 
-app.get('/opened', (req, res) => {
-    res.json({
-        openedMap
-    })
+app.get('/opened/:type', (req, res) => {
+    const type = req.params.type
+    if (openedMap.has(type)) {
+        res.status(200).send(Array.from(payoutMap.get(type)))
+    } else
+        res.status(404)
 })
 
 const log = m => {
@@ -84,6 +86,7 @@ const onMessage = e => {
     }
 
     if (message.name == 'api_option_init_all_result') {
+        // console.log('RES = ' + e.data)
         payoutStuff(message)
     }
 
@@ -143,6 +146,7 @@ function payoutStuff(message) {
         })
     payoutMap.set('turbo', payoutHere)
     openedMap.set('turbo', openedHere)
+    log(openedMap)
 }
 
 let ws = new WebSocket(url)
