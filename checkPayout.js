@@ -117,6 +117,7 @@ function digitalOpened(message) {
     openedMap.set('digital', openedHere)
 }
 
+
 function payoutDigitalStuff(message) {
     const quotes = message.msg.quotes
     const active = message.msg.active
