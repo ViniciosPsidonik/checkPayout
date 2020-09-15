@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 let logging
 
 setInterval(() => {
-    axios.get('https://checkpayout.herokuapp.com/')
+    axios.get('https://checkpayout1.herokuapp.com/')
 }, 300000)
 
 app.get('/log', (req, res) => {
