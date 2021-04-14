@@ -226,6 +226,7 @@ const activesMapString = new Map([
     ['AUDCAD-OTC', 86]
 ])
 
+
 axios.post('https://auth.iqoption.com/api/v2/login', {
     identifier: "vinipsidonik@hotmail.com",
     password: "gc896426"
