@@ -228,7 +228,7 @@ const activesMapString = new Map([
 
 
 axios.post('https://auth.iqoption.com/api/v2/login', {
-    identifier: "vinipsidonik@hotmail.com",
+    identifier: "carol.davila14@outlook.com",
     password: "gc896426"
 }).then((response) => {
     ssid = response.data.ssid
