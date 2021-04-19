@@ -151,6 +151,7 @@ function payoutStuff(message) {
                         openedHere.set(active, value.enabled)
                 }
             }
+            
         })
     openedMap.set('binary', openedHere)
     payoutMap.set('binary', payoutHere)
