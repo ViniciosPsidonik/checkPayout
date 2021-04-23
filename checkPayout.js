@@ -156,6 +156,7 @@ function payoutStuff(message) {
         })
     openedMap.set('binary', openedHere)
     payoutMap.set('binary', payoutHere)
+    
     payoutHere = new Map()
     openedHere = new Map()
     if (result && result.turbo)
