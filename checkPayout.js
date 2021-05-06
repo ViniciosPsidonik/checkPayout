@@ -141,7 +141,6 @@ function payoutStuff(message) {
     let payoutHere = new Map()
     let openedHere = new Map()
     
-    
     if (result && result.binary)
         Object.entries(result.binary.actives).forEach(([key1, value]) => {
             if (value.name) {
@@ -157,7 +156,7 @@ function payoutStuff(message) {
         })
 
 
-        
+
     openedMap.set('binary', openedHere)
     payoutMap.set('binary', payoutHere)
     
